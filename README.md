@@ -1,8 +1,11 @@
 
 You may need to login openshift and create a new project
 
-`oc login`
-`oc new-app <your-app>`
+```
+oc login
+
+oc new-app <your-app>
+```
 
 
 ## Prometheus deploy
