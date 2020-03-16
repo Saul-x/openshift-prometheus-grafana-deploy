@@ -2,4 +2,4 @@ datasources:
   - name: Prometheus
     type: prometheus
     access: proxy
-    url: http://custom-prometheus:9090
+    url: http://tw-na-pipeline-monitor-prometheus:9090
