@@ -46,3 +46,6 @@ oc new-app <your-app>
 
 **Remind: All command should execute in the project directory**
 
+#Simple way to deploy grafana and 
+just run it：
+`sh deploy.sh`
