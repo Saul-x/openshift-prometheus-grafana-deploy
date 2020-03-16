@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ImageStream
 metadata:
-  name: custom-grafana
+  name: tw-na-pipeline-monitor-grafana
   labels:
-    application: custom-grafana
+    application: tw-na-pipeline-monitor-grafana
 spec:
   tags:
     - name: latest
@@ -11,7 +11,7 @@ spec:
 apiVersion: v1
 kind: BuildConfig
 metadata:
-  name: custom-grafana-build
+  name: tw-na-pipeline-monitor-grafana-build
 spec:
   source:
     type: Binary
@@ -21,4 +21,4 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: custom-grafana:latest
+      name: tw-na-pipeline-monitor-grafana:latest

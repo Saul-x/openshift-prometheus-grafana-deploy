@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ImageStream
 metadata:
-  name: custom-prometheus
+  name: tw-na-pipeline-monitor-prometheus
   labels:
-    application: custom-prometheus
+    application: tw-na-pipeline-monitor-prometheus
 spec:
   tags:
     - name: latest
@@ -11,7 +11,7 @@ spec:
 apiVersion: v1
 kind: BuildConfig
 metadata:
-  name: custom-prometheus-build
+  name: tw-na-pipeline-monitor-prometheus-build
 spec:
   source:
     type: Binary
@@ -21,4 +21,4 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: custom-prometheus:latest
+      name: tw-na-pipeline-monitor-prometheus:latest
