@@ -10,5 +10,6 @@ oc log bc/tw-na-pipeline-monitor-prometheus-build --follow &&
 oc new-app tw-na-pipeline-monitor-prometheus &&
 oc new-app tw-na-pipeline-monitor-grafana &&
 oc expose svc/tw-na-pipeline-monitor-grafana &&
-oc expose svc/tw-na-pipeline-monitor-prometheus
+oc expose svc/tw-na-pipeline-monitor-prometheus &&
+oc set volumes dc/tw-na-pipeline-monitor-prometheus --add --overwrite --mount-path=/prometheus --claim-size 1Gi
 

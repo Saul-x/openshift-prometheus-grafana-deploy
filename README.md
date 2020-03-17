@@ -25,6 +25,10 @@ oc new-app <your-app>
 
 `oc expose svc/tw-na-pipeline-monitor-prometheus`
 
+5.mount a persistent volume to /prometheus which store the data of our prometheus (Data store path could be configured by --storage.tsdb.path)
+
+`oc set volumes dc/tw-na-pipeline-monitor-prometheus --add --overwrite --mount-path=/prometheus --claim-size 1Gi`
+
 **Remind: All command should execute in the project directory**
 
 ## Grafana deploy
