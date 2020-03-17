@@ -1,7 +1,6 @@
 #!/bin/bash
-oc delete all --selector app=tw-na-pipeline-monitor-grafana &
-oc delete all --selector app=tw-na-pipeline-monitor-prometheus &
-
+oc delete all --selector app=tw-na-pipeline-monitor-grafana &&
+oc delete all --selector app=tw-na-pipeline-monitor-prometheus &&
 oc apply -f tw-na-pipeline-monitor-prometheus-build.yaml &&
 oc apply -f tw-na-pipeline-monitor-grafana-build.yaml &&
 oc start-build tw-na-pipeline-monitor-grafana-build --from-dir grafana &&
