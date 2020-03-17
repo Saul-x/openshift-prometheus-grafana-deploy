@@ -46,6 +46,7 @@ oc new-app <your-app>
 
 **Remind: All command should execute in the project directory**
 
-#Simple way to deploy grafana and 
+#Simple way to deploy grafana and prometheus
+
 just run it：
 `sh deploy.sh`
