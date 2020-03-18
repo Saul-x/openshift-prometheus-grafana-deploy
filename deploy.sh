@@ -8,8 +8,9 @@ oc log bc/tw-na-pipeline-monitor-grafana-build --follow &&
 oc start-build tw-na-pipeline-monitor-prometheus-build --from-dir prometheus &&
 oc log bc/tw-na-pipeline-monitor-prometheus-build --follow &&
 oc new-app tw-na-pipeline-monitor-prometheus &&
+oc autoscale dc/tw-na-pipeline-monitor-prometheus --max 1 &&
+sh tw-na-pipeline-monitor-prometheus-deploy-patch.sh
 oc new-app tw-na-pipeline-monitor-grafana &&
 oc expose svc/tw-na-pipeline-monitor-grafana &&
 oc expose svc/tw-na-pipeline-monitor-prometheus &&
-oc set volumes dc/tw-na-pipeline-monitor-prometheus --add --overwrite --mount-path=/prometheus --claim-size 1Gi
-
+sh tw-na-pipeline-monitor-prometheus-persistent-volume-setting.sh
