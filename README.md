@@ -31,7 +31,7 @@ oc new-app <your-app>
   
 ```shell script
 
-# pass container parameter when deploy with oc patch command
+# pass container parameter when deploy
     oc patch dc/tw-na-pipeline-monitor-prometheus --type=json -p '
     [
       {
