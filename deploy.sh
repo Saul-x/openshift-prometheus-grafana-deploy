@@ -10,6 +10,5 @@ oc new-app tw-na-pipeline-monitor-grafana &&
 oc expose svc/tw-na-pipeline-monitor-grafana &&
 oc expose svc/tw-na-pipeline-monitor-prometheus &&
 oc apply -f prometheus/tw-na-pipeline-monitor-prometheus-resource.yaml &&
-sh prometheus/tw-na-pipeline-monitor-prometheus-persistent-volume-setting.sh &&
-oc set volume --add dc/tw-na-pipeline-monitor-prometheus -t=configmap -m /etc/prometheus/prometheus.yml --sub-path=prometheus.yml --name prometheus-config --configmap-name prometheus-configmap
+sh prometheus/tw-na-pipeline-monitor-prometheus-persistent-volume-setting.sh
 
