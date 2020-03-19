@@ -73,28 +73,39 @@ oc set volume --add dc/tw-na-pipeline-monitor-prometheus -t=configmap -m /etc/pr
 **Remind: All command should execute in the project directory**
 
 ## Grafana deploy
-1.create build config of pipeline monitor grafana:
+1.new a app from pipeline monitor image which you build from last command
 
 ```
-oc apply -f tw-na-pipeline-monitor-grafana-build.yaml
+oc new-app grafana/grafana --name=tw-na-pipeline-monitor-grafana
 ```
 
-2.build a tw-na-pipeline-monitor image:
-
-```
-oc start-build tw-na-pipeline-monitor-grafana-build --from-dir grafana
-```
-
-3.new a app from pipeline monitor image which you build from last command
-
-```
-oc new-app tw-na-pipeline-monitor-grafana
-```
-
-4.expose your service outside the openshift
+2.expose your service outside the openshift
 
 ```
 oc expose svc/tw-na-pipeline-monitor-grafana
+```
+
+3.I prepare some default config and a dashboard for grafana can connect the prometheus we build before
+    You should create a config map first:
+    
+```    
+oc apply -f grafana/tw-na-pipeline-monitor-grafana-resources.yaml
+```
+    
+the content of this file which we use to create config map in above command include:
+   
+  1.dashboard.yaml, it is dashboard support, should be put into /etc/grafana/provisioning/datasources
+        
+  2.datasource.yaml, it is datasource config, should be put into /etc/grafana/provisioning/dashboard
+        
+  3.jenkins-metrics-dashboard.json, it is a json file contains a dashboard object, should be put into the directory which specify in dashboard.yaml, here is /etc/grafana/provisioning/datasources
+        
+so we should mount these file right:
+    
+```
+    oc set volume --add dc/tw-na-pipeline-monitor-grafana -t=configmap -m /etc/grafana/provisioning/datasources/datasource.yaml --sub-path=datasource.yaml --name grafana-config --configmap-name grafana-configmap
+    oc set volume --add dc/tw-na-pipeline-monitor-grafana -t=configmap -m /etc/grafana/provisioning/dashboards/dashboard.yaml --sub-path=dashboard.yaml --name dashboard-provider --configmap-name grafana-configmap
+    oc set volume --add dc/tw-na-pipeline-monitor-grafana -t=configmap -m /etc/grafana/provisioning/dashboards/jenkins-metrics-dashboard.json --sub-path=jenkins-metrics-dashboard.json --name jenkins-metrics-dashboard --configmap-name grafana-configmap
 ```
 
 **Remind: All command should execute in the project directory**
