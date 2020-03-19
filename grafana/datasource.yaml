@@ -1,5 +1,0 @@
-datasources:
-  - name: Prometheus
-    type: prometheus
-    access: proxy
-    url: http://tw-na-pipeline-monitor-prometheus:9090
