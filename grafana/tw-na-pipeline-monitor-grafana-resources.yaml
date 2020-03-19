@@ -53,7 +53,7 @@ data:
       "links": [],
       "panels": [
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "description": "just  average value  in one day,  change the range in the query to change the time",
           "gridPos": {
             "h": 8,
@@ -209,7 +209,7 @@ data:
         },
         {
           "cacheTimeout": null,
-          "datasource": null,
+          "datasource": "Prometheus",
           "description": "count by total number,  more accurate.",
           "gridPos": {
             "h": 8,
@@ -266,93 +266,61 @@ data:
           "type": "stat"
         },
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
+          "datasource": "Prometheus",
           "description": "count by the result ,  apply for no miss and duplicate data. ",
-          "fill": 1,
-          "fillGradient": 0,
           "gridPos": {
             "h": 8,
             "w": 12,
             "x": 0,
             "y": 16
           },
-          "hiddenSeries": false,
           "id": 8,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
           "options": {
-            "dataLinks": []
+            "colorMode": "value",
+            "fieldOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "defaults": {
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": [],
+              "values": false
+            },
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto"
           },
-          "percentage": false,
           "pluginVersion": "6.6.2",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
           "targets": [
             {
               "expr": "count_over_time(default_jenkins_builds_last_build_result_code[1d])",
               "hide": false,
               "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Deployment Frequency (in last 1 day)(for test)",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
             },
             {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
+              "expr": "default_jenkins_builds_last_build_result_code",
+              "hide": true,
+              "refId": "B"
             }
           ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Deployment Frequency (in last 1 day)(for test)",
+          "type": "stat"
         }
       ],
       "schemaVersion": 22,
@@ -382,7 +350,7 @@ data:
       "timezone": "",
       "title": "jenkins metrics collect",
       "uid": "hEXGaUuZk",
-      "version": 4
+      "version": 5
     }
 kind: ConfigMap
 metadata:
