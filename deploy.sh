@@ -8,5 +8,6 @@ oc expose svc/tw-na-pipeline-monitor-grafana &&
 oc expose svc/tw-na-pipeline-monitor-prometheus &&
 oc apply -f prometheus/tw-na-pipeline-monitor-prometheus-resources.yaml &&
 oc apply -f grafana/tw-na-pipeline-monitor-grafana-resources.yaml &&
-sh prometheus/tw-na-pipeline-monitor-prometheus-persistent-volume-setting.sh
+sh prometheus/tw-na-pipeline-monitor-prometheus-persistent-volume-setting.sh &&
+sh grafana/tw-na-pipeline-monitor-grafana-persistent-volume-setting.sh
 
