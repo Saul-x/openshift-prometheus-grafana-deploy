@@ -153,7 +153,7 @@ data:
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Average Recovery Time (in 1 day)",
+          "title": "Average Recovery Time (in last 1 day)",
           "type": "stat"
         },
         {
@@ -197,14 +197,14 @@ data:
           "pluginVersion": "6.6.2",
           "targets": [
             {
-              "expr": "increase(default_jenkins_builds_failed_build_total_count[1d]) / increase(default_jenkins_builds_build_total_count[1d])",
+              "expr": "1 - (sum_over_time(default_jenkins_builds_last_build_result_code[1d])/count_over_time(default_jenkins_builds_last_build_result_code[1d]))",
               "hide": false,
               "refId": "B"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": " Average Failure Rate (in 1 day)",
+          "title": " Average Failure Rate (in last 1 day)",
           "type": "stat"
         },
         {
@@ -255,74 +255,17 @@ data:
           "pluginVersion": "6.6.2",
           "targets": [
             {
-              "expr": "max_over_time(default_jenkins_builds_build_total_count[1d]) - max_over_time(default_jenkins_builds_build_total_count[1d] offset 1d)",
-              "hide": false,
-              "refId": "A"
+              "expr": "count_over_time(default_jenkins_builds_last_build_result_code[1d])",
+              "refId": "B"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
           "title": "Deployment Frequency (in last 1 day)",
           "type": "stat"
-        },
-        {
-          "datasource": "Prometheus",
-          "description": "count by the result ,  apply for no miss and duplicate data. ",
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 16
-          },
-          "id": 8,
-          "options": {
-            "colorMode": "value",
-            "fieldOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "defaults": {
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              "overrides": [],
-              "values": false
-            },
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto"
-          },
-          "pluginVersion": "6.6.2",
-          "targets": [
-            {
-              "expr": "count_over_time(default_jenkins_builds_last_build_result_code[1d])",
-              "hide": false,
-              "refId": "A"
-            },
-            {
-              "expr": "default_jenkins_builds_last_build_result_code",
-              "hide": true,
-              "refId": "B"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Deployment Frequency (in last 1 day)(for test)",
-          "type": "stat"
         }
       ],
+      "refresh": "10s",
       "schemaVersion": 22,
       "style": "dark",
       "tags": [],
@@ -350,7 +293,7 @@ data:
       "timezone": "",
       "title": "jenkins metrics collect",
       "uid": "hEXGaUuZk",
-      "version": 5
+      "version": 9
     }
 kind: ConfigMap
 metadata:
