@@ -24,7 +24,9 @@ oc expose svc/tw-na-pipeline-monitor-prometheus
 3.mount a persistent volume to /prometheus which store the data of our prometheus (Data store path could be configured by --storage.tsdb.path)
 
 ```
-oc set volumes dc/tw-na-pipeline-monitor-prometheus --add --mount-path=/prometheus --claim-size 1Gi
+Before you mount new volume to /prometheus, you should delete the initial empty volume
+oc set volume dc/tw-na-pipeline-monitor-prometheus | grep as | awk -F 'as ' '{print $2}'|xargs -I {} oc set volume dc/tw-na-pipeline-monitor-prometheus --remove --name={}
+oc set volume dc/tw-na-pipeline-monitor-prometheus --add --type pvc --claim-name monitor-data-pvc --mount-path /prometheus --name monitor-data --claim-size 1Gi
 ```
 
   By default, --storage.tsdb.no-lockfile is false, It would lead certain error if multi-prometheus pod to lock same file in persistent volume, there are two example
