@@ -112,6 +112,7 @@ so we should mount these file right:
 
 **Remind: All command should execute in the project directory**
 
+
 #Simple way to deploy grafana and prometheus
 
 just run it：
