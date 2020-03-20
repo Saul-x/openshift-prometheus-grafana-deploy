@@ -7,9 +7,9 @@ oc login
 oc new-app <your-app>
 ```
 
-#Simple way to deploy grafana and prometheus
+# Simple way to deploy grafana and prometheus
 
-just run it：
+If you don't want to deploy the project step by step, you can just run it：
 ```
 sh deploy.sh
 ```
