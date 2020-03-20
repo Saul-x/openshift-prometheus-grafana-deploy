@@ -7,6 +7,12 @@ oc login
 oc new-app <your-app>
 ```
 
+#Simple way to deploy grafana and prometheus
+
+just run it：
+```
+sh deploy.sh
+```
 
 ## Prometheus deploy
 1.new a app from pipeline monitor image which you build from last command
@@ -111,11 +117,3 @@ so we should mount these file right:
 ```
 
 **Remind: All command should execute in the project directory**
-
-
-#Simple way to deploy grafana and prometheus
-
-just run it：
-```
-sh deploy.sh
-```
