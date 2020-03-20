@@ -59,12 +59,12 @@ oc set volumes dc/tw-na-pipeline-monitor-prometheus --add --mount-path=/promethe
 
 4.If you want config prometheus with customize prometheus.yml, you can create a configmap and mount config info to /etc/prometheus/prometheus.yml
 
-You can create a configmap from a file which contain the config info of prometheus
+You can apply a configmap from prometheus/tw-na-pipeline-monitor-prometheus-resources.yaml which contain the config info of prometheus
 ```$xslt
- oc create configmap prometheus-configmap --from-file prometheus/prometheus.yml
+ oc apply -f prometheus/tw-na-pipeline-monitor-prometheus-resources.yaml
 ```
 
-then add it to dc/tw-na-pipeline-monitor-prometheus, prometheus.yml would mount to /etc/prometheus/:
+then add config to dc/tw-na-pipeline-monitor-prometheus, prometheus.yml would mount to /etc/prometheus/:
 
 ```
 oc set volume --add dc/tw-na-pipeline-monitor-prometheus -t=configmap -m /etc/prometheus/prometheus.yml --sub-path=prometheus.yml --name prometheus-config --configmap-name prometheus-configmap
