@@ -1,37 +1,6 @@
 apiVersion: v1
 data:
   dashboard.yaml: |
-    apiVersion: 1
-
-    providers:
-      # <string> an unique provider name
-      - name: 'a unique provider name'
-        # <int> org id. will default to orgId 1 if not specified
-        orgId: 1
-        # <string, required> name of the dashboard folder. Required
-        folder: ''
-        # <string> folder UID. will be automatically generated if not specified
-        folderUid: ''
-        # <string, required> provider type. Required
-        type: file
-        # <bool> disable dashboard deletion
-        disableDeletion: false
-        # <bool> enable dashboard editing
-        editable: true
-        # <int> how often Grafana will scan for changed dashboards
-        updateIntervalSeconds: 10
-        # <bool> allow updating provisioned dashboards from the UI
-        allowUiUpdates: false
-        options:
-          # <string, required> path to dashboard files on disk. Required
-          path: /etc/grafana/provisioning/dashboards
-  datasource.yaml: |
-    datasources:
-      - name: Prometheus
-        type: prometheus
-        access: proxy
-        url: http://tw-na-pipeline-monitor-prometheus:9090
-  jenkins-metrics-dashboard.json: |
     {
       "annotations": {
         "list": [
@@ -53,56 +22,97 @@ data:
       "links": [],
       "panels": [
         {
+          "aliasColors": {},
+          "bars": true,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "Prometheus",
-          "description": "just  average value  in one day,  change the range in the query to change the time",
+          "fill": 1,
+          "fillGradient": 0,
           "gridPos": {
             "h": 8,
             "w": 12,
             "x": 0,
             "y": 0
           },
-          "id": 12,
-          "options": {
-            "colorMode": "value",
-            "fieldOptions": {
-              "calcs": [
-                "last"
-              ],
-              "defaults": {
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "ms"
-              },
-              "overrides": [],
-              "values": false
-            },
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto"
+          "hiddenSeries": false,
+          "id": 16,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
           },
-          "pluginVersion": "6.6.2",
+          "lines": false,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
           "targets": [
             {
-              "expr": "avg_over_time(default_jenkins_builds_merge_lead_time[1d])",
+              "expr": "hour(default_jenkins_builds_last_build_start_timestamp{jenkins_job=\"metrics-dev/metrics-dev-sample-pipeline\",result=~\".*\"})",
+              "format": "time_series",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
-          "title": "Average Lead Time (in last 1 day)",
-          "type": "stat"
+          "title": "Start Time Distribution",
+          "tooltip": {
+            "shared": false,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "min": 1,
+            "mode": "histogram",
+            "name": null,
+            "show": true,
+            "values": [
+              "total"
+            ]
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "datasource": "Prometheus",
@@ -144,10 +154,12 @@ data:
             "justifyMode": "auto",
             "orientation": "auto"
           },
-          "pluginVersion": "6.6.2",
+          "pluginVersion": "6.7.0-beta1",
           "targets": [
             {
               "expr": "avg_over_time(default_jenkins_builds_failed_build_recovery_time[1d])",
+              "interval": "",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -157,55 +169,92 @@ data:
           "type": "stat"
         },
         {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "Prometheus",
+          "fill": 1,
+          "fillGradient": 0,
           "gridPos": {
             "h": 8,
             "w": 12,
             "x": 0,
             "y": 8
           },
-          "id": 6,
-          "options": {
-            "colorMode": "value",
-            "fieldOptions": {
-              "calcs": [
-                "last"
-              ],
-              "defaults": {
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              "overrides": [],
-              "values": false
-            },
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto"
+          "hiddenSeries": false,
+          "id": 14,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
           },
-          "pluginVersion": "6.6.2",
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
           "targets": [
             {
-              "expr": "1 - (sum_over_time(default_jenkins_builds_last_build_result_code[1d])/count_over_time(default_jenkins_builds_last_build_result_code[1d]))",
-              "hide": false,
-              "refId": "B"
+              "expr": "count_over_time(default_jenkins_builds_last_build_duration_in_milliseconds{jenkins_job=\"metrics-dev/metrics-dev-sample-pipeline\",result=~\".*\"}[1d])",
+              "interval": "",
+              "legendFormat": "{{result}}-triggerBy={{triggeredBy}}",
+              "refId": "A"
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
-          "title": " Average Failure Rate (in last 1 day)",
-          "type": "stat"
+          "title": "Triggered By",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "cacheTimeout": null,
@@ -252,16 +301,125 @@ data:
             "justifyMode": "auto",
             "orientation": "horizontal"
           },
-          "pluginVersion": "6.6.2",
+          "pluginVersion": "6.7.0-beta1",
           "targets": [
             {
-              "expr": "count_over_time(default_jenkins_builds_last_build_result_code[1d])",
+              "expr": "sum(count_over_time(default_jenkins_builds_last_build_duration_in_milliseconds{jenkins_job=\"metrics-dev/metrics-dev-sample-pipeline\"}[1d]))",
+              "interval": "",
+              "legendFormat": "",
               "refId": "B"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
           "title": "Deployment Frequency (in last 1 day)",
+          "type": "stat"
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "just  average value  in one day,  change the range in the query to change the time",
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 16
+          },
+          "id": 12,
+          "options": {
+            "colorMode": "value",
+            "fieldOptions": {
+              "calcs": [
+                "last"
+              ],
+              "defaults": {
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "ms"
+              },
+              "overrides": [],
+              "values": false
+            },
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto"
+          },
+          "pluginVersion": "6.7.0-beta1",
+          "targets": [
+            {
+              "expr": "avg_over_time(default_jenkins_builds_merge_lead_time{triggeredBy=\"developer-admin-edit-view\"}[1d])",
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Average Lead Time (in last 1 day)",
+          "type": "stat"
+        },
+        {
+          "datasource": "Prometheus",
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 24
+          },
+          "id": 6,
+          "options": {
+            "colorMode": "value",
+            "fieldOptions": {
+              "calcs": [
+                "last"
+              ],
+              "defaults": {
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": [],
+              "values": false
+            },
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto"
+          },
+          "pluginVersion": "6.7.0-beta1",
+          "targets": [
+            {
+              "expr": "sum(count_over_time(default_jenkins_builds_last_build_duration_in_milliseconds{jenkins_job=\"metrics-dev/metrics-dev-sample-pipeline\",result=\"FAILURE\"}[1d]))/sum(count_over_time(default_jenkins_builds_last_build_duration_in_milliseconds{jenkins_job=\"metrics-dev/metrics-dev-sample-pipeline\"}[1d]))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "B"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": " Average Failure Rate (in last 1 day)",
           "type": "stat"
         }
       ],
@@ -273,7 +431,7 @@ data:
         "list": []
       },
       "time": {
-        "from": "now-6h",
+        "from": "now-3h",
         "to": "now"
       },
       "timepicker": {
@@ -293,7 +451,10 @@ data:
       "timezone": "",
       "title": "jenkins metrics collect",
       "uid": "hEXGaUuZk",
-      "version": 9
+      "variables": {
+        "list": []
+      },
+      "version": 1
     }
 kind: ConfigMap
 metadata:
