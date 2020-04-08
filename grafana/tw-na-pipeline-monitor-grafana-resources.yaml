@@ -18,7 +18,7 @@ data:
       "editable": true,
       "gnetId": null,
       "graphTooltip": 0,
-      "id": 1,
+      "id": 2,
       "links": [],
       "panels": [
         {
@@ -30,7 +30,7 @@ data:
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 8,
+            "h": 7,
             "w": 12,
             "x": 0,
             "y": 0
@@ -62,7 +62,7 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "hour(default_jenkins_builds_last_build_start_timestamp{jenkins_job=\"metrics-dev/metrics-dev-sample-pipeline\",result=~\".*\"})",
+              "expr": "(hour(default_jenkins_builds_last_build_start_timestamp{jenkins_job=\"metrics-dev/metrics-dev-sample-pipeline\",result=~\".*\"}/1000)+8)",
               "format": "time_series",
               "instant": false,
               "interval": "",
@@ -82,8 +82,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
-            "min": 1,
+            "buckets": 24,
+            "max": 23,
+            "min": 0,
             "mode": "histogram",
             "name": null,
             "show": true,
@@ -101,6 +102,7 @@ data:
               "show": true
             },
             {
+              "decimals": null,
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -180,7 +182,7 @@ data:
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 8
+            "y": 7
           },
           "hiddenSeries": false,
           "id": 14,
@@ -322,7 +324,7 @@ data:
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 16
+            "y": 15
           },
           "id": 12,
           "options": {
@@ -375,7 +377,7 @@ data:
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 24
+            "y": 23
           },
           "id": 6,
           "options": {
@@ -385,6 +387,7 @@ data:
                 "last"
               ],
               "defaults": {
+                "links": [],
                 "mappings": [],
                 "thresholds": {
                   "mode": "absolute",
@@ -449,12 +452,12 @@ data:
         ]
       },
       "timezone": "",
-      "title": "jenkins metrics collect",
-      "uid": "hEXGaUuZk",
+      "title": "jenkins metrics collect2",
+      "uid": "hEXGaUuZk3",
       "variables": {
         "list": []
       },
-      "version": 1
+      "version": 2
     }
 kind: ConfigMap
 metadata:
