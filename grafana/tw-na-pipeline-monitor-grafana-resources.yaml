@@ -1,6 +1,26 @@
 apiVersion: v1
 data:
   dashboard.yaml: |
+    apiVersion: 1
+    providers:
+      - name: 'provider name'
+        orgId: 1
+        folder: ''
+        folderUid: ''
+        type: file
+        disableDeletion: false
+        editable: true
+        updateIntervalSeconds: 10
+        allowUiUpdates: false
+        options:
+          path: /etc/grafana/provisioning/dashboards
+  datasource.yaml: |
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: http://tw-na-pipeline-monitor-prometheus:9090
+  jenkins-metrics-dashboard.json: |
     {
       "annotations": {
         "list": [
