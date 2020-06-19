@@ -1,4 +1,4 @@
-properties()
+properties([])
 pipeline {
     agent any
     stages {
