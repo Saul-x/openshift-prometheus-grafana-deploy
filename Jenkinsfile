@@ -1,4 +1,3 @@
-properties([opalCollector()])
 pipeline {
     agent any
     stages {
